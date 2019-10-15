@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote Tivi</title>
+</head>
+<body>
+<script>
+    let Remote = function () {
+        this.channel =1;
+        this.volume = 10;
+        this.getCoderemote = function () {
+            return this.coderemote;
+        };
+        this.setChannel = function (a) {
+          this.channel = a;
+        };
+        this.setVolume = function (a) {
+            this.volume = a;
+        };
+        this.controlChannel = function (Tivi) {
+            Tivi.controlChannel(this.channel);
+        };
+        this.controlVolume = function (Tivi) {
+            Tivi.controlVolume(this.volume);
+        };
+    };
+    let TiVi = function (nowchannel,nowvolume) {
+        this.nowchannel = nowchannel;
+        this.nowvolume = nowvolume;
+        this.status = true;
+        this.turnOn = function () {
+            if (!this.status) {
+                this.status = true;
+                alert('TiVi On');
+            } else {
+                alert('Tivi đang bật');
+            }
+        };
+        this.turnOff = function () {
+            if (this.status) {
+                this.status = false;
+                alert('TiVi Off');
+            } else {
+                alert('Tivi đang tắt');
+            }
+
+        };
+        this.controlChannel = function (remote) {
+            this.nowchannel = remote;
+        };
+        this.controlVolume = function (remote) {
+            this.nowvolume = this.nowvolume + remote;
+        };
+    };
+    let tivi1 = new TiVi(1,20);
+    let remote1 = new Remote();
+    tivi1.turnOn();
+    tivi1.controlChannel(7);
+    remote1.setChannel(3);
+    remote1.setVolume(2);
+    remote1.controlChannel(tivi1);
+    remote1.controlVolume(tivi1);
+</script>
+</body>
+</html>
